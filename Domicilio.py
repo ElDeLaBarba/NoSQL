@@ -7,4 +7,4 @@ class Domicilio:
         self.direccion = direccion
         
     def __str__(self) -> str:
-        return f"{self.datos_Persona}\nDirección: {self.direccion}"
+        return f"{self.datos_Persona}\n\nDirección: \n {self.direccion}"

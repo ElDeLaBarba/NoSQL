@@ -14,6 +14,9 @@ def main():
         print("¡Buenas!\n")
         print("     1-Agregar persona")
         print("     2-Ver personas")
+        print("     3-Agregar domicilio")
+        print("     4-Ver todos los domicilios")
+        print("     5-Consultar domicilio")
         print("     0-Salir")
         opt = input("Selecione una opción: ")
         print("\n")
@@ -24,6 +27,10 @@ def main():
                 hper.printPersonas()
             case "3":
                 agregarDomicilio()
+            case "4":
+                hdom.printDomicilios()
+            case "5":
+                consultarDomicilio()
             case "0": 
                 exit = True
     
@@ -62,7 +69,9 @@ def agregarDomicilio():
     
     hdom.addDomicilio(domicilio)
 
+def consultarDomicilio():
+    CI = input("Ingrese la cédula del usuario: ")
     
-
+    
 if __name__ == "__main__":
     main()

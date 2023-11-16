@@ -23,6 +23,6 @@ class HandlerPersona:
     def findPersona(self, CI) -> DatosPersona:
         encontrada = None
         for persona in self.personas: 
-            if CI in persona == CI:
+            if persona.CI == CI:
                 encontrada = persona
         return encontrada                

@@ -13,9 +13,21 @@ class HandlerDomicilio:
         self.domicilios.append(domicilio)
         
     def giveDomicilioID(self) -> int:
-        if self.domicilios.count() == 0:
+        if len(self.domicilios) == 0:
             return 0
         else:
             return self.domicilios[-1].id+1
         
-    
+    def printDomicilios(self):
+        for domicilio in self.domicilios: 
+            #print(domicilio.datos_persona)
+            print(str(domicilio.datos_persona) + "\n\nDirección: \n\n" + str(domicilio.direccion))
+            
+    def consultarDomicilio(self, CI):
+        for domicilio in self.domicilios:
+            if domicilio.datos_persona.ci == CI:
+                print(str(domicilio.direccion))
+                
+                
+
+        
