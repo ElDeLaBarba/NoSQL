@@ -27,6 +27,7 @@ class HandlerDomicilio:
         for domicilio in self.domicilios:
             if domicilio.datos_persona.ci == CI:
                 print(str(domicilio.direccion))
+                print("\n")
                 
                 
 

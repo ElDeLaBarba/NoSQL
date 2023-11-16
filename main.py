@@ -71,6 +71,7 @@ def agregarDomicilio():
 
 def consultarDomicilio():
     CI = input("Ingrese la cédula del usuario: ")
+    hdom.consultarDomicilio(CI)
     
     
 if __name__ == "__main__":
