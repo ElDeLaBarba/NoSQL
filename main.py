@@ -56,7 +56,7 @@ def agregarDomicilio():
     localidad = input("Localidad: ")
     calle = input("Calle: ")
     nro = input("Nro. de puerta: ")
-    apartamento = input("Nro. deapartamento: ")
+    apartamento = input("Nro. de apartamento: ")
     padron = input("Padron: ") 
     ruta = input("Ruta: ")
     km = input("Km: ")
@@ -73,6 +73,21 @@ def consultarDomicilio():
     CI = input("Ingrese la cédula del usuario: ")
     hdom.consultarDomicilio(CI)
     
+def domiciliosPorCriterio():
+    print("Criterios: \n")
+    print("     Departamento\n")
+    print("     Localidad\n")
+    print("     Calle\n")
+    print("     Nro. de puerta (nro)\n")
+    print("     Apartamento\n")
+    print("     Padron\n")
+    print("     Ruta\n")
+    print("     Km\n")
+    print("     Letra\n")
+    print("     Barrio\n")
+    criterio = input("Escriba el criterio por el que quiere sortear los domicilios: ")
+    
+    hdom.domiciliosPorCriterio(criterio)
     
 if __name__ == "__main__":
     main()
