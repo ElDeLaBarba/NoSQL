@@ -10,16 +10,21 @@ hdom = HandlerDomicilio()
 
 def main():
     exit = False
+    print("=============================================")
+    print("==================¡Buenas!===================")
     while exit==False:
-        print("¡Buenas!\n")
-        print("     1-Agregar persona")
-        print("     2-Ver personas")
-        print("     3-Agregar domicilio")
+        print("=============================================")
+        print("     1-Agregar Persona")
+        print("     2-Ver Personas")
+        print("     3-Agregar Domicilio")
         print("     4-Ver todos los domicilios")
-        print("     5-Consultar domicilio")
+        print("     5-Consultar Domicilio")
+        print("     6-Obtener domicilios por Criterio")
         print("     0-Salir")
+        print("=============================================")
         opt = input("Selecione una opción: ")
         print("\n")
+        print("=============================================")
         match str(opt):
             case "1":
                 agregarPersona()
@@ -31,13 +36,15 @@ def main():
                 hdom.printDomicilios()
             case "5":
                 consultarDomicilio()
+            case "6":
+                domiciliosPorCriterio()
             case "0": 
                 exit = True
     
 
 
 def agregarPersona():
-    print("Ingrese los siguientes datos: \n")
+    print("Ingrese los siguientes datos: ")
     CI = input("Cédula: ")
     name = input("Nombre: ")
     surname = input("Apellido: ")
@@ -47,11 +54,11 @@ def agregarPersona():
     hper.addPersona(datosPersona)
     
 def agregarDomicilio():
-    print("Ingrese los siguientes datos: \n")
+    print("Ingrese los siguientes datos: ")
     CI = input("Cédula de la persona: ")
     persona = hper.findPersona(CI)
     
-    print("Ingrese los siguientes datos de dirección (si no corresponde, ingrese 0): \n")
+    print("Ingrese los siguientes datos de dirección (si no corresponde, ingrese 0): ")
     departamento = input("Departamento: ")
     localidad = input("Localidad: ")
     calle = input("Calle: ")
@@ -74,18 +81,18 @@ def consultarDomicilio():
     hdom.consultarDomicilio(CI)
     
 def domiciliosPorCriterio():
-    print("Criterios: \n")
-    print("     Departamento\n")
-    print("     Localidad\n")
-    print("     Calle\n")
-    print("     Nro. de puerta (nro)\n")
-    print("     Apartamento\n")
-    print("     Padron\n")
-    print("     Ruta\n")
-    print("     Km\n")
-    print("     Letra\n")
-    print("     Barrio\n")
-    criterio = input("Escriba el criterio por el que quiere sortear los domicilios: ")
+    opt = 1
+    criterio = ["", "", ""]
+    while opt != 0:
+        print("Criterios: ")
+        print("     1-Departamento\n")
+        print("     2-Localidad\n")
+        print("     3-Barrio\n")
+        opt = int(input("¿Por qué campo quiere filtrar (0 si no quiere agregar más filtros)?: "))
+        if opt > 0 and opt < 4:
+            criterio[opt-1] = input("Escriba el criterio por el que filtrar: ")
+        elif opt >= 4: 
+            print("Campo no reconocido. Reintente.")
     
     hdom.domiciliosPorCriterio(criterio)
     
