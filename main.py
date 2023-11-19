@@ -1,3 +1,21 @@
+##BD 
+#pip install pymongo
+import pymongo
+MONGO_HOST = "localhost"
+MONGO_PORT = 27017
+MONGO_TIMEOUT = 10000
+MONGO_URI = "mongodb://{}:{}/".format(MONGO_HOST, MONGO_PORT)
+
+try:
+    client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=MONGO_TIMEOUT)
+    client.server_info()
+    print("Conection success ")
+    client.close()
+except pymongo.errors.ServerSelectionTimeoutError as errorTimeout:
+    print("Timeout exception")
+except pymongo.errors.ConnectionFailure as errorConnecting:
+    print("Connection failed " + errorConnecting)
+
 from DatosPersona import DatosPersona
 from Direccion import Direccion
 from Domicilio import Domicilio
@@ -11,8 +29,8 @@ hdom = HandlerDomicilio()
 def main():
     exit = False
     print("=============================================")
-    print("==================¡Buenas!===================")
-    while exit==False:
+    print("================¡Bienvenido!=================")
+    while exit == False:
         print("=============================================")
         print("     1-Agregar Persona")
         print("     2-Ver Personas")

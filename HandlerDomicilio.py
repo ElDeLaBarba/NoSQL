@@ -24,7 +24,7 @@ class HandlerDomicilio:
     def printDomicilios(self):
         for domicilio in self.domicilios: 
             print(str(domicilio.datos_Persona) + "\n\nDirección: \n\n" + str(domicilio.direccion))
-      
+
             
     def consultarDomicilio(self, CI):
         for domicilio in self.domicilios:
