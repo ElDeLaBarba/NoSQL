@@ -1,3 +1,5 @@
+import pymongo
+
 class HandlerDomicilio: 
     domicilios = []
     _instance = None
@@ -26,11 +28,19 @@ class HandlerDomicilio:
             print(str(domicilio.datos_Persona) + "\n\nDirección: \n\n" + str(domicilio.direccion))
 
             
-    def consultarDomicilio(self, CI):
-        for domicilio in self.domicilios:
-            if domicilio.datos_Persona.CI == CI:
-                print(str(domicilio.direccion))
-                print("\n")
+    def consultarDomicilio(self, uri, db, col):
+        # for domicilio in self.domicilios:
+        #     if domicilio.datos_Persona.CI == CI:
+        #         print(str(domicilio.direccion))
+        #         print("\n")
+        try: 
+            cliente=pymongo.MongoClient(uri, serverSelectionTimeoutMS=1000)
+            database = cliente[db]
+            colection = database[col]
+            for direccion in colection.find():
+                print(direccion)
+        except:
+            print("error intentando imprimir domicilios")
                 
                 
     def domiciliosPorCriterio(self, criterio):

@@ -5,6 +5,11 @@ MONGO_HOST = "localhost"
 MONGO_PORT = 27017
 MONGO_TIMEOUT = 10000
 MONGO_URI = "mongodb://{}:{}/".format(MONGO_HOST, MONGO_PORT)
+MONGO_BD = "NoSQL"
+MONGO_COL_DIRECCION = "Direcciones"
+MONGO_COL_DOMICILIO = "Domicilios"
+MONGO_COL_PERSONA = "Personas"
+
 
 try:
     client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=MONGO_TIMEOUT)
@@ -14,7 +19,7 @@ try:
 except pymongo.errors.ServerSelectionTimeoutError as errorTimeout:
     print("Timeout exception")
 except pymongo.errors.ConnectionFailure as errorConnecting:
-    print("Connection failed " + errorConnecting)
+    print("Connection failed")
 
 from DatosPersona import DatosPersona
 from Direccion import Direccion
@@ -96,7 +101,7 @@ def agregarDomicilio():
 
 def consultarDomicilio():
     CI = input("Ingrese la cédula del usuario: ")
-    hdom.consultarDomicilio(CI)
+    hdom.consultarDomicilio(MONGO_URI, MONGO_BD, MONGO_COL_DIRECCION, CI)
     
 def domiciliosPorCriterio():
     opt = 1
