@@ -68,13 +68,20 @@ def main():
 
 def agregarPersona():
     print("Ingrese los siguientes datos: ")
-    CI = input("Cédula: ")
+    #crear persona
+    CI = int(input("Cédula: "))
     name = input("Nombre: ")
     surname = input("Apellido: ")
-    age = input("Edad: ")
-    datosPersona = DatosPersona(CI, name, surname, age)
+    age = int(input("Edad: "))
+    # datosPersona = DatosPersona(CI, name, surname, age)
+    datosPersona = {
+        "CI": CI,
+        "name": name,
+        "surname": surname,
+        "age": age
+    }
     print(str(datosPersona))
-    hper.addPersona(datosPersona)
+    hper.addPersona(datosPersona, MONGO_URI, MONGO_BD, MONGO_COL_PERSONA)
     
 def agregarDomicilio():
     print("Ingrese los siguientes datos: ")
@@ -94,14 +101,13 @@ def agregarDomicilio():
     barrio = input("Barrio: ")
     
     direccion = Direccion(departamento, localidad, calle, nro, apartamento, padron, ruta, km, letra, barrio)
-    
     domicilio = Domicilio(hdom.giveDomicilioID(), persona, direccion)
     
     hdom.addDomicilio(domicilio)
 
 def consultarDomicilio():
     CI = input("Ingrese la cédula del usuario: ")
-    hdom.consultarDomicilio(MONGO_URI, MONGO_BD, MONGO_COL_DIRECCION, CI)
+    hdom.consultarDomicilio(MONGO_URI, MONGO_BD, MONGO_COL_DIRECCION)
     
 def domiciliosPorCriterio():
     opt = 1

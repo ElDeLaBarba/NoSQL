@@ -1,5 +1,5 @@
+import pymongo
 import DatosPersona
-
 
 class HandlerPersona:
     personas = []
@@ -12,8 +12,17 @@ class HandlerPersona:
             cls.personas = []
         return cls._instance
         
-    def addPersona(self, datosPersona):
-        self.personas.append(datosPersona)
+    def addPersona(self, datosPersona, uri, db, col):
+        # self.personas.append(datosPersona)
+        try: 
+            cliente=pymongo.MongoClient(uri, serverSelectionTimeoutMS=1000)
+            database = cliente[db]
+            colection = database[col]
+            # idPersona = colection.insertOne(datosPersona)
+            idPersona = colection.insert_one(datosPersona)
+            print("Agregada persona con id: ", idPersona.inserted_id)
+        except Exception as e:
+            print(f"Ocurrió una excepción: {e}")
         
     def printPersonas(self):
         for persona in self.personas:
