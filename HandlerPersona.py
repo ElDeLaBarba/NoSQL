@@ -29,9 +29,14 @@ class HandlerPersona:
             print(persona)
             print("\n")
             
-    def findPersona(self, CI) -> DatosPersona:
-        encontrada = None
-        for persona in self.personas: 
-            if persona.CI == CI:
-                encontrada = persona
-        return encontrada                
+    # def findPersona(self, CI) -> DatosPersona:
+    def findPersona(self, CI):
+            cliente=pymongo.MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=1000)
+            database = cliente["NoSQL"]
+            colection = database["Personas"]
+            criterio_busqueda = {"CI": int(CI)}
+            print("ci: ", CI)
+            documento = colection.find_one(criterio_busqueda)
+            if documento:
+                print("\nUsuario "+CI+" encontrado\n")
+                return True

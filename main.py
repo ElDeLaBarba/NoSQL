@@ -82,12 +82,11 @@ def agregarPersona():
     }
     print(str(datosPersona))
     hper.addPersona(datosPersona, MONGO_URI, MONGO_BD, MONGO_COL_PERSONA)
-    
+
 def agregarDomicilio():
     print("Ingrese los siguientes datos: ")
     CI = input("Cédula de la persona: ")
-    persona = hper.findPersona(CI)
-    
+    # persona = hper.findPersona(CI)
     print("Ingrese los siguientes datos de dirección (si no corresponde, ingrese 0): ")
     departamento = input("Departamento: ")
     localidad = input("Localidad: ")
@@ -100,30 +99,58 @@ def agregarDomicilio():
     letra = input("Letra: ")
     barrio = input("Barrio: ")
     
-    direccion = Direccion(departamento, localidad, calle, nro, apartamento, padron, ruta, km, letra, barrio)
-    domicilio = Domicilio(hdom.giveDomicilioID(), persona, direccion)
-    
-    hdom.addDomicilio(domicilio)
+    # direccion = Direccion(departamento, localidad, calle, nro, apartamento, padron, ruta, km, letra, barrio)
+    # domicilio = Domicilio(hdom.giveDomicilioID(), persona, direccion)
+    direccion = {
+        "departamento": departamento,
+        "localidad": localidad,
+        "calle": calle,
+        "nro": nro,
+        "apartamento": apartamento,
+        "padron": padron,
+        "ruta": ruta,
+        "km": km,
+        "letra": letra,
+        "barrio": barrio
+    }
+    hdom.addDomicilio(MONGO_URI, MONGO_BD, MONGO_COL_DOMICILIO, CI, direccion)
 
 def consultarDomicilio():
     CI = input("Ingrese la cédula del usuario: ")
-    hdom.consultarDomicilio(MONGO_URI, MONGO_BD, MONGO_COL_DIRECCION)
+    hdom.consultarDomicilio(MONGO_URI, MONGO_BD, MONGO_COL_DOMICILIO, CI)
     
 def domiciliosPorCriterio():
-    opt = 1
-    criterio = ["", "", ""]
-    while opt != 0:
-        print("Criterios: ")
-        print("     1-Departamento\n")
-        print("     2-Localidad\n")
-        print("     3-Barrio\n")
-        opt = int(input("¿Por qué campo quiere filtrar (0 si no quiere agregar más filtros)?: "))
-        if opt > 0 and opt < 4:
-            criterio[opt-1] = input("Escriba el criterio por el que filtrar: ")
-        elif opt >= 4: 
-            print("Campo no reconocido. Reintente.")
-    
-    hdom.domiciliosPorCriterio(criterio)
-    
+    # opt = 1
+    # criterias = ["", "", ""]
+    # while opt != 0:
+    #     print("Criterios: ")
+    #     print("     1-Departamento\n")
+    #     print("     2-Localidad\n")
+    #     print("     3-Barrio\n")
+    #     opt = int(input("¿Por qué campo quiere filtrar (0 si no quiere agregar más filtros)?: "))
+    #     if opt > 0 and opt < 4:
+    #         criterias[opt-1] = input("Escriba el criterio por el que filtrar: ")
+    #     elif opt >= 4:
+    #         print("Campo no reconocido. Reintente.")
+    print("Ingrese los criterios de interés (0 en caso contrario): ")
+    departamento = input("Departamento: ")
+    localidad = input("Localidad: ")
+    barrio = input("Barrio: ")
+
+    criterias = {
+        "direccion.departamento": departamento ,
+        "direccion.localidad": localidad ,
+        "direccion.barrio": barrio
+    }
+
+    if departamento == '0':
+        del criterias["direccion.departamento"]
+    if localidad == '0':
+        del criterias["direccion.localidad"]
+    if barrio == '0':
+        del criterias["direccion.barrio"]
+
+    hdom.domiciliosPorCriterio(MONGO_URI, MONGO_BD, MONGO_COL_DOMICILIO, criterias)
+
 if __name__ == "__main__":
     main()
