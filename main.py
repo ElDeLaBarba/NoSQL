@@ -64,6 +64,8 @@ def main():
                 domiciliosPorCriterio()
             case "0": 
                 exit = True
+            case _:
+                print("Opción inválida. Reintente.")
     
 
 
