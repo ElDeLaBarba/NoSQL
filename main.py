@@ -36,36 +36,39 @@ def main():
     exit = False
     print("=============================================")
     print("================¡Bienvenido!=================")
-    while exit == False:
-        print("=============================================")
-        print("     1-Agregar Persona")
-        print("     2-Ver Personas")
-        print("     3-Agregar Domicilio")
-        print("     4-Ver todos los domicilios")
-        print("     5-Consultar Domicilio")
-        print("     6-Obtener domicilios por Criterio")
-        print("     0-Salir")
-        print("=============================================")
-        opt = input("Selecione una opción: ")
-        print("\n")
-        print("=============================================")
-        match str(opt):
-            case "1":
-                agregarPersona()
-            case "2":
-                hper.printPersonas(MONGO_URI, MONGO_BD, MONGO_COL_PERSONA)
-            case "3":
-                agregarDomicilio()
-            case "4":
-                hdom.printDomicilios()
-            case "5":
-                consultarDomicilio()
-            case "6":
-                domiciliosPorCriterio()
-            case "0": 
-                exit = True
-            case _:
-                print("Opción inválida. Reintente.")
+    try:
+        while exit == False:
+            print("=============================================")
+            print("     1-Agregar Persona")
+            print("     2-Ver Personas")
+            print("     3-Agregar Domicilio")
+            print("     4-Ver todos los domicilios")
+            print("     5-Consultar Domicilio")
+            print("     6-Obtener domicilios por Criterio")
+            print("     0-Salir")
+            print("=============================================")
+            opt = input("Selecione una opción: ")
+            print("\n")
+            print("=============================================")
+            match str(opt):
+                case "1":
+                    agregarPersona()
+                case "2":
+                    hper.printPersonas(MONGO_URI, MONGO_BD, MONGO_COL_PERSONA)
+                case "3":
+                    agregarDomicilio()
+                case "4":
+                    hdom.printDomicilios()
+                case "5":
+                    consultarDomicilio()
+                case "6":
+                    domiciliosPorCriterio()
+                case "0": 
+                    exit = True
+                case _:
+                    print("Opción inválida. Reintente.")
+    except EOFError as e:
+        print(end="")
     
 
 
