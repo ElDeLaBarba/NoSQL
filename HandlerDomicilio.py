@@ -1,5 +1,6 @@
 import pymongo
 from HandlerPersona import HandlerPersona
+from Direccion import Direccion
 import json
 
 hper = HandlerPersona()
@@ -25,7 +26,7 @@ class HandlerDomicilio:
             colection = database[col]
             exist_persona = hper.findPersona(CI)
             print("existe persona: ", exist_persona)
-            if exist_persona:
+            if exist_persona != None:
                 domicilio = {
                     "CI": CI,
                     "direccion": direcc
@@ -34,6 +35,7 @@ class HandlerDomicilio:
                 print("Agregado Domicilio con id: ", id_domicilio.inserted_id)
                 return json.dumps({'message': 'Domicilio agregado correctamente'}), 200
             else:
+                print("Error 402: No existe una persona con la cédula aportada.")
                 return json.dumps({'error': 'No existe una persona con la cédula proporcionada'}), 402
         except pymongo.errors.ServerSelectionTimeoutError:
             return json.dumps({'error': 'Error de conexión con la base de datos'}), 500
@@ -52,6 +54,9 @@ class HandlerDomicilio:
         for domicilio in self.domicilios: 
             print(str(domicilio.datos_Persona) + "\n\nDirección: \n\n" + str(domicilio.direccion))
 
+
+
+
             
     def consultarDomicilio(self, uri, db, col, CI):
         # for domicilio in self.domicilios:
@@ -62,14 +67,32 @@ class HandlerDomicilio:
             cliente=pymongo.MongoClient(uri, serverSelectionTimeoutMS=1000)
             database = cliente[db]
             colection = database[col]
+            
+            pers = database["Personas"]
+        
+            
             filter_criteria = {"CI": CI}
-            results = colection.find(filter_criteria)
-            for result in results:
-                if "direccion" in result:
-                    domicilio_info = result["direccion"]
-                    print(f"Domicilio para CI {CI}: {domicilio_info}")
-                else:
-                    print(f"No se encontró información de domicilio para CI {CI}")
+            filter_criteria_pers = {"CI": int(CI)}
+            
+            persona = pers.find_one(filter_criteria_pers)
+            
+            
+            if persona != None:
+                results = colection.find(filter_criteria)
+                for result in results:
+                    if "direccion" in result:
+                        domicilio_info = result["direccion"]
+                        
+                        dir = self.bdToDom(domicilio_info)
+                            
+                        print("=============================================\n")
+                        print(f"Domicilio para CI {CI}: \n{str(dir)}")
+                        print("=============================================")
+                    else:
+                        print(f"No se encontró información de domicilio para CI {CI}")
+            else: 
+                print("Error 402: No existe una persona con la cédula aportada.")
+                return json.dumps({'error': 'No existe una persona con la cédula proporcionada'}), 402
         except:
             print("error intentando imprimir domicilios")
                 
@@ -84,7 +107,12 @@ class HandlerDomicilio:
             for result in results:
                 if result:
                     domicilio_info = result["direccion"]
-                    print(f"Domicilio: {domicilio_info}")
+                    
+                    dom = self.bdToDom(domicilio_info)
+                    
+                    print("=============================================\n")
+                    print(f"Domicilio: \n{dom}")
+                    print("=============================================")
                 else:
                     print(f"No se encontró información de domicilio para los criterios", criterias)
         except:
@@ -110,3 +138,20 @@ class HandlerDomicilio:
         # else: 
         #     print("No hay domicilios con el criterio establecido.\n")
         
+
+    def bdToDom(self, domicilio_info) -> Direccion: 
+        departamento = str(domicilio_info).split("'departamento': '")[1].split("', 'localidad':")[0]
+        localidad = str(domicilio_info).split("'localidad': '")[1].split("', 'calle':")[0]
+        calle = str(domicilio_info).split("'calle': '")[1].split("', 'nro':")[0]
+        nro = str(domicilio_info).split("'nro': '")[1].split("', 'apartamento':")[0]
+        apartamento = str(domicilio_info).split("'apartamento': '")[1].split("', 'padron':")[0]
+        padron = str(domicilio_info).split("'padron': '")[1].split("', 'ruta':")[0]
+        ruta = str(domicilio_info).split("'ruta': '")[1].split("', 'km':")[0]
+        km = str(domicilio_info).split("'km': '")[1].split("', 'letra':")[0]
+        letra = str(domicilio_info).split("'letra': '")[1].split("', 'barrio':")[0]
+        barrio = str(domicilio_info).split("'barrio': '")[1].split("'}")[0]
+                    
+                    
+        dir = Direccion(departamento, localidad, calle, nro, apartamento, padron, ruta, km, letra, barrio)
+        
+        return dir

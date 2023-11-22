@@ -6,5 +6,6 @@ class Domicilio:
         self.datos_Persona = datos_Persona
         self.direccion = direccion
         
+        
     def __str__(self) -> str:
         return f"{self.datos_Persona}\n\nDirección: \n {self.direccion}"
