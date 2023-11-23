@@ -1,13 +1,16 @@
 from locust import HttpUser, task, between
 import gevent.monkey
+import random
 
 gevent.monkey.patch_all()
 
+
 class GeventApiUser(HttpUser):
-    wait_time = between(1, 3)
+    wait_time = between(3, 7)
     
     @task
     def get_users(self):
+        random = random_number()
         headers = {
             "Content-Type": "application/json",
             "Access-Control-Request-Headers": "*",
@@ -18,10 +21,13 @@ class GeventApiUser(HttpUser):
             "dataSource": "Cluster0",
             "database": "NoSQL",
             "collection": "Personas",
-            "filter": { "age": { "$lt": 1000 } }
-        }
+            "document": { "CI": random,
+                        "name": "John",
+                        "surname": "Sample",
+                        "age": 42 }
+                    }
         response = self.client.post(
-            'https://sa-east-1.aws.data.mongodb-api.com/app/data-rakua/endpoint/data/v1/action/find', 
+            'https://sa-east-1.aws.data.mongodb-api.com/app/data-rakua/endpoint/data/v1/action/insertOne', 
             headers=headers, 
             json=body
         )
@@ -29,5 +35,10 @@ class GeventApiUser(HttpUser):
 
         # response = self.client.post("https://sa-east-1.aws.data.mongodb-api.com/app/data-rakua/endpoint/data/v1")
         # print(f"Response: {response.text}")
+
+
+def random_number() -> int:
+    return random.randint(1, 99999999)
+
 
 GeventApiUser.GEVENT_SUPPORT = True
