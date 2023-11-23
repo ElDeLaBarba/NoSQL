@@ -29,7 +29,7 @@ Para comenzar con la instalación, será necesario tener este repo descargado en
 
 > pip install pymongo
 
-De esta manera, se instalará pymongo (librería necesaria para inicializar el proyecto). Luego, será necesario que instale la extensión de Python en VS Code. Ahora ya es posible ejecutar el proyecto y añadir, ver y filtrar datos desde la BD. 
+De esta manera, se instalará pymongo (librería necesaria para inicializar el proyecto). Luego, será necesario que instale la extensión de Python en VS Code. Ahora ya es posible ejecutar el proyecto y añadir, ver y filtrar datos en la BD. 
 
 ### Configuración de MongoDB Compass:
 
