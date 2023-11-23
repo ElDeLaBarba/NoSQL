@@ -5,7 +5,9 @@ MONGO_HOST = "localhost"
 MONGO_PORT = 27017
 MONGO_TIMEOUT = 10000
 #MONGO_URI = "mongodb://{}:{}/".format(MONGO_HOST, MONGO_PORT)
-MONGO_URI = "mongodb+srv://ElDeLaBarba:4YQSc2HHQvjBj892@cluster0.o1jktdl.mongodb.net/"
+#MONGO_URI = "mongodb+srv://AXA37251:Pd36Ey8mOVSHAh3Q@cluster0.o1jktdl.mongodb.net/"
+MONGO_URI = "mongodb+srv://AXA37251:Pd36Ey8mOVSHAh3Q@cluster0.o1jktdl.mongodb.net/"
+
 MONGO_BD = "NoSQL"
 MONGO_COL_DIRECCION = "Direcciones"
 MONGO_COL_DOMICILIO = "Domicilios"
