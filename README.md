@@ -53,7 +53,7 @@ Luego de instalar y settear el programa siguiendo esta guía:
 
 > https://www.jenkins.io/doc/book/installing/windows/
 
-Y habiendo iniciado sesión en el programa, creará una nueva tarea del tipo pipeline, con un nombre a elección. Luego, en la configuración de la tarea, deberá marcar la opción 'GitHub Project' y pegar la URL de este repositorio en el campo que se le desbloqueará a continuación. Para finalizar con el proceso, en la opción 'Pipeline', colocará el siguiente código: 
+Y habiendo iniciado sesión en el programa, deberá crear una nueva tarea del tipo pipeline, con un nombre a elección. Luego, en la configuración de la tarea, deberá marcar la opción 'GitHub Project' y pegar la URL de este repositorio en el campo que se le desbloqueará a continuación. Para finalizar con el proceso, en la opción 'Pipeline', colocará el siguiente código: 
 
 ```
 pipeline{
