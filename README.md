@@ -111,3 +111,7 @@ Para nuestro caso hicimos pruebas de lectura y carga de personas y domicilios, d
 2) DESKTOP-AO296UM/WARNING/root: CPU usage above 90%! This may constrain your throughput and may even give inconsistent response time measurements! See https://docs.locust.io/en/stable/running-distributed.html for how to distribute the load over multiple CPU cores or machines
 
 Para cadencias de carga de usuarios menos, como 40 concurrencias y 80 cargas en 15 segundos el sistema pudo resolver sin problemas, persistiendo la totalidad de los datos.
+
+
+
+4YQSc2HHQvjBj892
