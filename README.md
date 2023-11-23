@@ -1,16 +1,18 @@
 # NoSQL
 
-
-
 Proyecto final para la materia Base de datos NoSQL de la carrera Tecnólogo en Informática, hecho en Python y MongoDB.
 
 ## Tecnologías elegidas:
 
-
-Elegimos MongoDB debido a que creemos que, de las opciones que tenemos disponibles, es la más accesible y a la que mayor potencial podemos exprimirle de cara a futuro. Utilizamos MongoDB Compass como interfaz gráfica y MongoDB Atlas para las conexiones en la nube.
+Elegimos MongoDB debido a que creemos que, de las opciones que tenemos disponibles, es la más accesible y a la que mayor potencial podemos exprimirle de cara a futuro. Utilizamos MongoDB Compass como interfaz gráfica y MongoDB Atlas para almacenar datos en la nube.
 
 Python, por su lado, es una tecnología accesible y con una gran compatibilidad con MongoDB, por lo que fue la opción más adecuada para esta tarea. Utilizamos pymongo para conectar ambas de manera sencilla.
 
+## El modelo de datos
++ Dada la elección de tecnologías, el tipo de base de datos que se debió sugerir es de tipo Documental conforme al comportamiento y funcionamiento de MongoDB.
++ La base cuenta con dos tablas principales, Personas y Domicilios, cuya disposición será la siguiente:
+    Personas: { CI*, nombre, apellido, edad }
+    Domicilio: { Persona, { Departamento, Localidad, Calle, Nro, Apartamento, Padrón, Ruta, Km, Letra, Barrio } }
 
 ## Descarga, inicialización y uso del proyecto:
 
@@ -86,3 +88,5 @@ pipeline{
 ```
 
 Ahora, Jenkins se ocupará de comprobar que el programa compila y no contiene errores de código en la ejecución. 
+
+###
