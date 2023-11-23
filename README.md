@@ -27,8 +27,9 @@ Python, por su lado, es una tecnología accesible y con una gran compatibilidad 
 
 ### Inicialización: 
 
-Para comenzar con la instalación, será necesario tener este repo descargado en su sistema local. Desde el CMD de VS Code, se ejecuta el siguiente comando: 
+Para comenzar con la instalación, será necesario tener este repo descargado en su sistema local. Desde el CMD de VS Code, se ejecutan los siguientes comandos: 
 
+> python -m pip install --upgrade pip
 > pip install pymongo
 
 De esta manera, se instalará pymongo (librería necesaria para inicializar el proyecto). Luego, será necesario que instale la extensión de Python en VS Code. Ahora ya es posible ejecutar el proyecto y añadir, ver y filtrar datos en la BD. 
