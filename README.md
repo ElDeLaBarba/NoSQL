@@ -12,7 +12,7 @@ Elegimos MongoDB debido a que creemos que, de las opciones que tenemos disponibl
 Python, por su lado, es una tecnología accesible y con una gran compatibilidad con MongoDB, por lo que fue la opción más adecuada para esta tarea. Utilizamos pymongo para conectar ambas de manera sencilla.
 
 
-## Descarga e inicialización del proyecto:
+## Descarga, inicialización y uso del proyecto:
 
 
 ### Requisitos previos:
@@ -21,6 +21,7 @@ Python, por su lado, es una tecnología accesible y con una gran compatibilidad 
 + MongoDB Compass
 + Postman
 + VS Code
++ Jenkins
 
 ### Inicialización: 
 
@@ -40,8 +41,48 @@ De esta manera, se iniciará sesión con un usuario genérico, permitiendo ver l
 
 ### Configuración de Postman: 
 
-Luego de inicializar el proyecto, y habiendo instalado el programa previamente especificado, se deberá acceder al siguiente link: 
+Luego de inicializar el proyecto, y habiendo instalado y configurado el programa previamente especificado con su cuenta de usuario, se deberá acceder al siguiente link: 
 
 > https://www.postman.com/cloudy-meteor-237196/workspace/nosql-postmanaccess 
 
 Y forkear las colecciones llamadas 'MongoDB Data API' y 'MongoDB Data API for Domicilios'. Ahora, podrá hacer requests de prueba directamente a la BD desde Postman. La primera colección permite trabajar con Personas, y la segunda con Domicilios. Ambas generan datos aleatorios. 
+
+### Utilizando Jenkins: 
+
+Luego de instalar y settear el programa siguiendo esta guía: 
+
+> https://www.jenkins.io/doc/book/installing/windows/
+
+Y habiendo iniciado sesión en el programa, creará una nueva tarea del tipo pipeline, con un nombre a elección. Luego, en la configuración de la tarea, deberá marcar la opción 'GitHub Project' y pegar la URL de este repositorio en el campo que se le desbloqueará a continuación. Para finalizar con el proceso, en la opción 'Pipeline', colocará el siguiente código: 
+
+```
+pipeline{
+
+    agent any
+    
+    stages {
+    
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ElDeLaBarba/NoSQL']]])
+            }
+        }
+        stage('Build') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ElDeLaBarba/NoSQL'
+                bat 'pip install pymongo'
+                bat 'pip install pytest'
+                bat 'python -u main.py'
+
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'python -m main'
+            }
+        }
+    }
+}
+```
+
+Ahora, Jenkins se ocupará de comprobar que el programa compila y no contiene errores de código en la ejecución. 
