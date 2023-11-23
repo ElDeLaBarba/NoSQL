@@ -89,4 +89,16 @@ pipeline{
 
 Ahora, Jenkins se ocupará de comprobar que el programa compila y no contiene errores de código en la ejecución. 
 
-###
+### Pruebas de cargas de datos 
+Para probar la base de datos y el tráfico que pudiera soportar se hicieron distintas pruebas de carga de datos.
+Las mismas se hicieron con la herramienta "Locust", pensada para ser usada junto con python.
+
+Para ejecutar la misma es necesario crear un archivo de prueba que será ejecutado con el comando: locust -f {nombre_del_archivo}.py
+
+Una vez cargado el comando, nos podremos redirigir al navegador para revisar el funcionamiento de las pruebas y organizar el ritmo/fuerza de las mismas.
+
+Para nuestro caso hicimos pruebas de lectura y carga de personas y domicilios, descubriendo límites de concurrencia en torno a los 400 usuarios y 800 escrituras:
+1) [2023-11-22 22:52:53,316] DESKTOP-AO296UM/WARNING/locust.runners: Your selected spawn rate is very high (>100), and this is known to sometimes cause issues. Do you really need to ramp up that fast?
+2) DESKTOP-AO296UM/WARNING/root: CPU usage above 90%! This may constrain your throughput and may even give inconsistent response time measurements! See https://docs.locust.io/en/stable/running-distributed.html for how to distribute the load over multiple CPU cores or machines
+
+Para cadencias de carga de usuarios menos, como 40 concurrencias y 80 cargas en 15 segundos el sistema pudo resolver sin problemas, persistiendo la totalidad de los datos.
