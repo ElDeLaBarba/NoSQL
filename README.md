@@ -19,7 +19,7 @@ Python, por su lado, es una tecnología accesible y con una gran compatibilidad 
 
 ### Requisitos previos:
 
-+ Python 3.11
++ Python 3.11 o superior
 + MongoDB Compass
 + Postman
 + VS Code
