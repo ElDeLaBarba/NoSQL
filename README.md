@@ -27,7 +27,7 @@ Python, por su lado, es una tecnología accesible y con una gran compatibilidad 
 
 ### Inicialización: 
 
-Para comenzar con la instalación, será necesario tener este repo descargado en su sistema local. Desde el CMD de Windows/Linux, se ejecuta el siguiente comando: 
+Para comenzar con la instalación, será necesario tener este repo descargado en su sistema local. Desde el CMD de VS Code, se ejecuta el siguiente comando: 
 
 > pip install pymongo
 
