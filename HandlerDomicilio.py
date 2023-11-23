@@ -50,10 +50,24 @@ class HandlerDomicilio:
             return self.domicilios[-1].id+1
         
         
-    def printDomicilios(self):
-        for domicilio in self.domicilios: 
-            print(str(domicilio.datos_Persona) + "\n\nDirección: \n\n" + str(domicilio.direccion))
-
+    def printDomicilios(self, uri, db, col):
+        try:
+            cliente=pymongo.MongoClient(uri, serverSelectionTimeoutMS=1000)
+            database = cliente[db]
+            colection = database[col]
+            results = list(colection.find())
+            for result in results: 
+                domicilio_info = result["direccion"]
+                CI = result["CI"]
+                    
+                dom = self.bdToDom(domicilio_info)
+                    
+                print("=============================================\n")
+                print(f"Domicilio: \n\n{dom}")
+                print(f"CI de la persona asociada: {CI}")
+                print("=============================================")
+        except:
+            print("error intentando imprimir domicilios")
 
 
 
@@ -107,11 +121,13 @@ class HandlerDomicilio:
             for result in results:
                 if result:
                     domicilio_info = result["direccion"]
+                    CI = result["CI"]
                     
                     dom = self.bdToDom(domicilio_info)
                     
                     print("=============================================\n")
-                    print(f"Domicilio: \n{dom}")
+                    print(f"Domicilio: \n\n{dom}")
+                    print(f"CI de la persona asociada: {CI}")
                     print("=============================================")
                 else:
                     print(f"No se encontró información de domicilio para los criterios", criterias)

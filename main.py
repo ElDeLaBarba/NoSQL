@@ -60,7 +60,7 @@ def main():
                 case "3":
                     agregarDomicilio()
                 case "4":
-                    hdom.printDomicilios()
+                    hdom.printDomicilios(MONGO_URI, MONGO_BD, MONGO_COL_DOMICILIO)
                 case "5":
                     consultarDomicilio()
                 case "6":
