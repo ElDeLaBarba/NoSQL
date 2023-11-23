@@ -93,9 +93,16 @@ Ahora, Jenkins se ocupará de comprobar que el programa compila y no contiene er
 Para probar la base de datos y el tráfico que pudiera soportar se hicieron distintas pruebas de carga de datos.
 Las mismas se hicieron con la herramienta "Locust", pensada para ser usada junto con python.
 
-Para ejecutar la misma es necesario crear un archivo de prueba que será ejecutado con el comando: locust -f {nombre_del_archivo}.py
+Para ejecutar la misma es necesario instalarla con el comando:
 
-Una vez cargado el comando, nos podremos redirigir al navegador para revisar el funcionamiento de las pruebas y organizar el ritmo/fuerza de las mismas.
+> pip install locust
+
+Y crear un archivo de prueba que será ejecutado con el comando:
+
+> locust -f {nombre_del_archivo}.py
+
+En nuestro caso, ya creamos dos archivos: 'loadtest.py' y 'loadtest_create.py', que prueban peticiones de find y create respectivamente.
+Una vez cargado el comando, nos podremos redirigir al navegador en la dirección default (http://0.0.0.0:8089) para revisar el funcionamiento de las pruebas y organizar el ritmo/fuerza de las mismas.
 
 Para nuestro caso hicimos pruebas de lectura y carga de personas y domicilios, descubriendo límites de concurrencia en torno a los 400 usuarios y 800 escrituras:
 1) [2023-11-22 22:52:53,316] DESKTOP-AO296UM/WARNING/locust.runners: Your selected spawn rate is very high (>100), and this is known to sometimes cause issues. Do you really need to ramp up that fast?
